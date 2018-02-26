@@ -19,7 +19,11 @@ public abstract class AbstractEmailService implements EmailService {
         message.setFrom(feedback.getEmail());
         message.setSubject("[DevOps Buddy]: Feedback received from " + feedback.getFirstName() + " " + feedback
                 .getLastName() + "!");
-        message.setText(feedback.getFeedback());
+        message.setText(
+                "Имя: " + feedback.getFirstName() + "\n" +
+                "Фамилия: " + feedback.getLastName() + "\n" +
+                "Email: " + feedback.getEmail() + "\n" +
+                "Сообщение: " + feedback.getFeedback());
         return message;
     }
 

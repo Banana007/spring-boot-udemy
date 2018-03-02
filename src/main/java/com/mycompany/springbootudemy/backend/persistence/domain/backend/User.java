@@ -8,20 +8,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class User implements Serializable{
+public class User implements Serializable {
 
     /** The Serial Version UID for Serializable classes. */
     private static final long serialVersionUID = 1L;
 
+
     public User() {
+
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private String username;
+
     private String password;
+
     private String email;
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -47,6 +53,8 @@ public class User implements Serializable{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "plan_id")
     private Plan plan;
+
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
@@ -163,6 +171,8 @@ public class User implements Serializable{
         this.userRoles = userRoles;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -171,10 +181,14 @@ public class User implements Serializable{
         User user = (User) o;
 
         return id == user.id;
+
     }
 
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+
+
 }
+

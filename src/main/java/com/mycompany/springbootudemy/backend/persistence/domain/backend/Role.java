@@ -1,5 +1,7 @@
 package com.mycompany.springbootudemy.backend.persistence.domain.backend;
 
+import com.mycompany.springbootudemy.enums.RolesEnum;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -11,17 +13,26 @@ public class Role implements Serializable {
     /** The Serial Version UID for Serializable classes. */
     private static final long serialVersionUID = 1L;
 
-    public Role(){
-
-    }
-
     @Id
-    @GeneratedValue
     private int id;
+
     private String name;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
+
+    public Role() {
+
+    }
+
+    /**
+     * Full constructor.
+     * @param rolesEnum
+     */
+    public Role(RolesEnum rolesEnum) {
+        this.id = rolesEnum.getId();
+        this.name = rolesEnum.getRoleName();
+    }
 
     public int getId() {
         return id;
@@ -55,6 +66,7 @@ public class Role implements Serializable {
         Role role = (Role) o;
 
         return id == role.id;
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.mycompany.springbootudemy.backend.persistence.domain.backend;
 
+import com.mycompany.springbootudemy.enums.PlansEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,13 +15,20 @@ public class Plan implements Serializable {
     /** The Serial Version UID for Serializable classes. */
     private static final long serialVersionUID = 1L;
 
+    @Id
+    private int id;
+
+    private String name;
+
+    /** Default constructor. */
     public Plan() {
+
     }
 
-    @Id
-    @GeneratedValue
-    private int id;
-    private String name;
+    public Plan(PlansEnum plansEnum) {
+        this.id = plansEnum.getId();
+        this.name = plansEnum.getPlanName();
+    }
 
     public int getId() {
         return id;
@@ -52,13 +60,5 @@ public class Plan implements Serializable {
     @Override
     public int hashCode() {
         return id;
-    }
-
-    @Override
-    public String toString() {
-        return "Plan{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

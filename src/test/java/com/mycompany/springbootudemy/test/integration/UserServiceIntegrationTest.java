@@ -7,7 +7,7 @@ import com.mycompany.springbootudemy.backend.persistence.domain.backend.UserRole
 import com.mycompany.springbootudemy.backend.service.UserService;
 import com.mycompany.springbootudemy.enums.PlansEnum;
 import com.mycompany.springbootudemy.enums.RolesEnum;
-import com.mycompany.springbootudemy.utils.UsersUtils;
+import com.mycompany.springbootudemy.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +29,7 @@ public class UserServiceIntegrationTest {
     public void testCreateNewUser() throws Exception {
 
         Set<UserRole> userRoles = new HashSet<>();
-        User basicUser = UsersUtils.createBasicUser();
+        User basicUser = UserUtils.createBasicUser();
         userRoles.add(new UserRole(basicUser, new Role(RolesEnum.BASIC)));
 
         User user = userService.createUser(basicUser, PlansEnum.BASIC, userRoles);

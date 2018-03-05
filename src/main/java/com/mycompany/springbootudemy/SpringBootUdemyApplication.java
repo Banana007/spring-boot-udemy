@@ -6,14 +6,13 @@ import com.mycompany.springbootudemy.backend.persistence.domain.backend.UserRole
 import com.mycompany.springbootudemy.backend.service.UserService;
 import com.mycompany.springbootudemy.enums.PlansEnum;
 import com.mycompany.springbootudemy.enums.RolesEnum;
-import com.mycompany.springbootudemy.utils.UsersUtils;
+import com.mycompany.springbootudemy.utils.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.HashSet;
@@ -35,7 +34,7 @@ public class SpringBootUdemyApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-		User user = UsersUtils.createBasicUser();
+		User user = UserUtils.createBasicUser();
 		Set<UserRole> userRoles = new HashSet<>();
 		userRoles.add(new UserRole(user, new Role(RolesEnum.BASIC)));
 		LOG.debug("1---Creating user with username {}", user.getUsername());

@@ -34,7 +34,10 @@ public class SpringBootUdemyApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-		User user = UserUtils.createBasicUser();
+		String username = "proUser";
+		String email = "proUser@gmail.com";
+
+		User user = UserUtils.createBasicUser(username,email);
 		Set<UserRole> userRoles = new HashSet<>();
 		userRoles.add(new UserRole(user, new Role(RolesEnum.BASIC)));
 		LOG.debug("1---Creating user with username {}", user.getUsername());

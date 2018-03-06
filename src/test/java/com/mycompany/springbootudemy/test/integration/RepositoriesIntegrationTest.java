@@ -13,7 +13,9 @@ import com.mycompany.springbootudemy.enums.RolesEnum;
 import com.mycompany.springbootudemy.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,7 +37,7 @@ public class RepositoriesIntegrationTest {
     @Autowired
     private UserRepository userRepository;
 
-
+    @Rule public TestName testName = new TestName();
 
 
     @Before
@@ -66,7 +68,10 @@ public class RepositoriesIntegrationTest {
     @Test
     public void createNewUser() throws Exception {
 
-        User basicUser = createUser();
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + "@gmail.com";
+
+        User basicUser = createUser(username,email);
 
         User newlyCreatedUser = userRepository.findOne(basicUser.getId());
         Assert.assertNotNull(newlyCreatedUser);
@@ -83,7 +88,11 @@ public class RepositoriesIntegrationTest {
 
     @Test
     public void testDeleteUser() throws Exception {
-        User basicUser = createUser();
+
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + "@gmail.com";
+
+        User basicUser = createUser(username, email);
         userRepository.delete(basicUser.getId());
     }
 
@@ -97,11 +106,11 @@ public class RepositoriesIntegrationTest {
         return new Role(rolesEnum);
     }
 
-    private User createUser() {
+    private User createUser(String username, String email) {
         Plan basicPlan = createPlan(PlansEnum.BASIC);
         planRepository.save(basicPlan);
 
-        User basicUser = UserUtils.createBasicUser();
+        User basicUser = UserUtils.createBasicUser(username, email);
         basicUser.setPlan(basicPlan);
 
         Role basicRole = createRole(RolesEnum.BASIC);
